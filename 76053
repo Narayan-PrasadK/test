@@ -1,0 +1,24 @@
+---
+- name: CHeck the access
+  hosts: test
+  tasks:
+   - block:
+     - name: install httplib2 package to work uri module
+	   yum:
+	     name: python-httplib2
+		 state: latest
+	 - name: Check the URL
+       uri:
+        url: http://workstation.lab.example.com/materials/access
+        return_content: yes      
+     - name: Print the output
+       copy:
+        content: "i am good"
+        dest: /var/tmp/access.html
+        mode: 0644      
+     rescue:
+     - name: Copy
+       copy:
+        content: "I am not access"
+        dest: /var/tmp/notaccess.html
+        mode: 0644
