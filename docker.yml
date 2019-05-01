@@ -1,0 +1,10 @@
+---
+- name: installing Docker
+  hosts: all
+- name: install docker
+  command: yum install docker
+- name: enable docker
+  command: service docker enable
+- name: start docker
+  command: service docker start
+...
